@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
+import 'example_screen_navigate.dart';
 
 class ListWidget extends StatefulWidget {
   @override
@@ -25,10 +25,14 @@ class _ListWidgetState extends State<ListWidget> {
         padding: const EdgeInsets.all(0),
         itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
-          print(index);
           return InkWell(
             onTap: () {
-              print("Pressed $index Tıklandı ${entries[index]}");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        FirstRoute(todo: Todo(name: entries[index]))),
+              );
             },
             child: Container(
               margin: EdgeInsets.only(bottom: 5),
@@ -88,4 +92,10 @@ class _ListWidgetState extends State<ListWidget> {
           );
         });
   }
+}
+
+class Students {
+  String name;
+  String surname;
+  Students({this.name, this.surname});
 }
