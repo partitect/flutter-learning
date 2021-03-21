@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/components/stack_example.dart';
 import 'package:flutter_application_1/stack_example.dart';
 import 'drawer_example.dart';
 
@@ -11,11 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: StackPageViee(),
+      home: StackViewExample(),
     );
   }
 }
-
 
 //1 => Bottom App Bar 5 Icon olsun. Iconların her biri bir containeri aktif etsin ve containerler bir image a sahip olsun
 //2=> Drawer olsun drawer header kısmına kendi containerinizi yerleştirin
