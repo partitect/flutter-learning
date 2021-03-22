@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/components/curved_bottombar.dart';
 import 'package:flutter_application_1/components/stack_example.dart';
 
 void main() {
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: StackViewExample(),
+      home: CurvedBottomBar(),
     );
   }
 }
