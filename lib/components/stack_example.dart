@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StackViewExample extends StatefulWidget {
@@ -20,280 +21,295 @@ class _StackViewExampleState extends State<StackViewExample> {
     "J"
   ];
   var bottomNaviIndex = 0;
+
+  var positioned = Alignment.bottomCenter;
+  changePosition(Alignment newPosition) {
+    setState(() {
+      positioned = newPosition;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     print(bottomNaviIndex);
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Stack Example"),
-          shadowColor: Colors.red,
-          backgroundColor: Colors.teal,
-        ),
-        drawer: Drawer(
-          child: Container(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              children: [
-                DrawerHeader(
-                  padding: EdgeInsets.all(0),
-                  margin: EdgeInsets.zero,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/img/5.jpeg"),
-                      fit: BoxFit.cover,
-                    ),
-                    color: Colors.blue,
-                  ),
-                  child: Container(
-                    child: Center(
-                      child: Text(
-                        'Flutter Drawer',
-                        style: GoogleFonts.quicksand(
-                          textStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w900,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    color: Colors.teal,
-                    child: ListView.separated(
-                      separatorBuilder: (context, index) => Divider(
-                        color: Colors.black.withOpacity(.2),
-                      ),
-                      padding: EdgeInsets.zero,
-                      itemCount: entries.length,
-                      itemBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.all(0),
-                        child: ListTile(
-                          title: Text(
-                            "List Tile ${entries[index]}",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    )),
-              ],
-            ),
-          ),
-        ),
-        body: Center(
-          child: Container(
-            padding: EdgeInsets.all(10),
-            child: Stack(
-              alignment: bottomNaviIndex == 0
-                  ? Alignment.bottomCenter
-                  : bottomNaviIndex == 1
-                      ? Alignment.bottomLeft
-                      : bottomNaviIndex == 2
-                          ? Alignment.topCenter
-                          : bottomNaviIndex == 3
-                              ? Alignment.topLeft
-                              : Alignment.bottomRight,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.brown,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(.5),
-                        blurRadius: 5,
-                        offset: Offset(0, 1),
-                        spreadRadius: 1,
-                      )
-                    ],
-                    image: DecorationImage(
-                      image: AssetImage("assets/img/5.jpeg"),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                        Colors.red.withOpacity(.5),
-                        BlendMode.colorBurn,
-                      ),
-                    ),
-                  ),
-                  width: MediaQuery.of(context).size.width / 2,
-                  height: MediaQuery.of(context).size.height / 2.5,
-                  child: Center(
-                    child: Text(
-                      'Hello Flutter',
-                      style: GoogleFonts.quicksand(
-                        textStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 40,
-                            fontWeight: FontWeight.w900),
-                      ),
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.brown,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(.5),
-                        blurRadius: 5,
-                        offset: Offset(0, 1),
-                        spreadRadius: 1,
-                      )
-                    ],
-                    image: DecorationImage(
-                      image: AssetImage("assets/img/3.jpeg"),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                        Colors.red.withOpacity(.5),
-                        BlendMode.colorBurn,
-                      ),
-                    ),
-                  ),
-                  width: MediaQuery.of(context).size.width / 1.5,
-                  height: MediaQuery.of(context).size.height / 3,
-                  child: Center(child: Text("TeKa")),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.brown,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(.5),
-                        blurRadius: 5,
-                        offset: Offset(0, 1),
-                        spreadRadius: 1,
-                      )
-                    ],
-                    image: DecorationImage(
-                      image: AssetImage("assets/img/2.jpeg"),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                        Colors.red.withOpacity(.5),
-                        BlendMode.colorBurn,
-                      ),
-                    ),
-                  ),
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 4,
-                  child: Center(
-                    child: Text(
-                      'Stack Example',
-                      style: GoogleFonts.quicksand(
-                        textStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 40,
-                            fontWeight: FontWeight.w900),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          height: 70,
-          color: Colors.teal,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      appBar: buildAppBar(),
+      drawer: buildDrawer(context),
+      body: Center(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Stack(
+            alignment: positioned,
             children: [
               Container(
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      bottomNaviIndex = 0;
-                    });
-                  },
-                  child: Icon(
-                    Icons.face_outlined,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Container(
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      bottomNaviIndex = 1;
-                    });
-                  },
-                  child: Icon(
-                    Icons.lightbulb_outline,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.only(bottom: 10, top: 8),
-                transform: Matrix4.translationValues(0.0, -30.0, 0.0),
-                width: 50,
-                height: 50,
                 decoration: BoxDecoration(
-                  color: Colors.teal,
+                  color: Colors.brown,
                   borderRadius: BorderRadius.all(
-                    Radius.circular(25),
+                    Radius.circular(10),
                   ),
-                  border:
-                      Border.all(width: 3.0, color: const Color(0xFFFFFFFF)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(.5),
+                      blurRadius: 5,
+                      offset: Offset(0, 1),
+                      spreadRadius: 1,
+                    )
+                  ],
+                  image: DecorationImage(
+                    image: AssetImage("assets/img/1.jpeg"),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.red.withOpacity(.5),
+                      BlendMode.colorBurn,
+                    ),
+                  ),
                 ),
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      bottomNaviIndex = 2;
-                    });
-                  },
-                  child: Icon(
-                    Icons.local_fire_department_outlined,
-                    color: Colors.white,
-                    size: 30,
+                width: MediaQuery.of(context).size.width / 2,
+                height: MediaQuery.of(context).size.height / 2.5,
+                child: Center(
+                  child: Text(
+                    'Hello Flutter',
+                    style: GoogleFonts.quicksand(
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.w900),
+                    ),
                   ),
                 ),
               ),
               Container(
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      bottomNaviIndex = 3;
-                    });
-                  },
-                  child: Icon(
-                    Icons.batch_prediction_outlined,
-                    color: Colors.white,
+                decoration: BoxDecoration(
+                  color: Colors.brown,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(.5),
+                      blurRadius: 5,
+                      offset: Offset(0, 1),
+                      spreadRadius: 1,
+                    )
+                  ],
+                  image: DecorationImage(
+                    image: AssetImage("assets/img/3.jpeg"),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.red.withOpacity(.5),
+                      BlendMode.colorBurn,
+                    ),
                   ),
                 ),
+                width: MediaQuery.of(context).size.width / 1.5,
+                height: MediaQuery.of(context).size.height / 3,
+                child: Center(child: Text("TeKa")),
               ),
               Container(
-                child: InkWell(
-                  onTap: () {
-                    setState(() {
-                      bottomNaviIndex = 4;
-                    });
-                  },
-                  child: Icon(
-                    Icons.bubble_chart_outlined,
-                    color: Colors.white,
+                decoration: BoxDecoration(
+                  color: Colors.brown,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(.5),
+                      blurRadius: 5,
+                      offset: Offset(0, 1),
+                      spreadRadius: 1,
+                    )
+                  ],
+                  image: DecorationImage(
+                    image: AssetImage("assets/img/4.jpeg"),
+                    fit: BoxFit.cover,
+                    colorFilter: ColorFilter.mode(
+                      Colors.red.withOpacity(.5),
+                      BlendMode.colorBurn,
+                    ),
+                  ),
+                ),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 4,
+                child: Center(
+                  child: Text(
+                    'Stack Example',
+                    style: GoogleFonts.quicksand(
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.w900),
+                    ),
                   ),
                 ),
               ),
             ],
           ),
-        ));
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        color: Colors.green,
+        child: Container(
+          height: 50.0,
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width / 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      child: IconButton(
+                        icon: const Icon(Icons.face_outlined),
+                        tooltip: 'Increase volume by 10',
+                        color: Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            changePosition(Alignment.topLeft);
+                          });
+                        },
+                      ),
+                    ),
+                    Container(
+                      child: IconButton(
+                        icon: const Icon(Icons.batch_prediction_outlined),
+                        tooltip: 'Increase volume by 10',
+                        color: Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            changePosition(Alignment.topRight);
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width / 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      child: IconButton(
+                        icon: const Icon(Icons.lightbulb_outline),
+                        tooltip: 'Increase volume by 10',
+                        color: Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            changePosition(Alignment.bottomLeft);
+                          });
+                        },
+                      ),
+                    ),
+                    Container(
+                      child: IconButton(
+                        icon: const Icon(Icons.bubble_chart_outlined),
+                        tooltip: 'Increase volume by 10',
+                        color: Colors.white,
+                        onPressed: () {
+                          setState(() {
+                            changePosition(Alignment.bottomRight);
+                          });
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => setState(() {
+          changePosition(Alignment.bottomCenter);
+        }),
+        tooltip: 'Increment Counter',
+        child: SvgPicture.asset(
+          'assets/svg/logononcirclegreen.svg',
+          height: 50.0,
+          width: 50.0,
+          color: Colors.white,
+          allowDrawingOutsideViewBox: true,
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
+  }
+
+  Drawer buildDrawer(BuildContext context) {
+    return Drawer(
+      child: Container(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          shrinkWrap: true,
+          children: [
+            DrawerHeader(
+              padding: EdgeInsets.all(0),
+              margin: EdgeInsets.zero,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/img/5.jpeg"),
+                  fit: BoxFit.cover,
+                ),
+                color: Colors.blue,
+              ),
+              child: Container(
+                child: Center(
+                  child: Text(
+                    'Flutter Drawer',
+                    style: GoogleFonts.quicksand(
+                      textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                color: Colors.teal,
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  physics: AlwaysScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) => Divider(
+                    color: Colors.black.withOpacity(.2),
+                  ),
+                  padding: EdgeInsets.zero,
+                  itemCount: entries.length,
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.all(0),
+                    child: ListTile(
+                      title: Text(
+                        "List Tile ${entries[index]}",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      trailing: Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )),
+          ],
+        ),
+      ),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      brightness: Brightness.dark,
+      title: Text("Stack Example"),
+      shadowColor: Colors.red,
+      backgroundColor: Colors.green,
+    );
   }
 }

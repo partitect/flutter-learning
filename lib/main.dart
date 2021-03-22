@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/stack_example.dart';
-import 'package:flutter_application_1/stack_example.dart';
-import 'drawer_example.dart';
 
 void main() {
   runApp(MyApp());
