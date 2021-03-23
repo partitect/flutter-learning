@@ -21,11 +21,17 @@ class _StackViewExampleState extends State<StackViewExample> {
     "J"
   ];
   var bottomNaviIndex = 0;
-
+  var stackIndex = 0;
   var positioned = Alignment.bottomCenter;
   changePosition(Alignment newPosition) {
     setState(() {
       positioned = newPosition;
+    });
+  }
+
+  changeStackIndex(stck) {
+    setState(() {
+      stackIndex = stck;
     });
   }
 
@@ -38,7 +44,8 @@ class _StackViewExampleState extends State<StackViewExample> {
       body: Center(
         child: Container(
           padding: EdgeInsets.all(10),
-          child: Stack(
+          child: IndexedStack(
+            index: stackIndex,
             alignment: positioned,
             children: [
               Container(
@@ -179,7 +186,7 @@ class _StackViewExampleState extends State<StackViewExample> {
                         color: Colors.white,
                         onPressed: () {
                           setState(() {
-                            changePosition(Alignment.topRight);
+                            changeStackIndex(0);
                           });
                         },
                       ),
@@ -199,7 +206,7 @@ class _StackViewExampleState extends State<StackViewExample> {
                         color: Colors.white,
                         onPressed: () {
                           setState(() {
-                            changePosition(Alignment.bottomLeft);
+                            changeStackIndex(1);
                           });
                         },
                       ),
@@ -211,7 +218,7 @@ class _StackViewExampleState extends State<StackViewExample> {
                         color: Colors.white,
                         onPressed: () {
                           setState(() {
-                            changePosition(Alignment.bottomRight);
+                            changeStackIndex(2);
                           });
                         },
                       ),
