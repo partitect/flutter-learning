@@ -40,11 +40,11 @@ class _Screen1State extends State<Screen1> {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(.5),
-                    blurRadius: 5,
-                    offset: Offset(0, 1),
+                    color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 1,
-                  )
+                    blurRadius: 10,
+                    offset: Offset(0, 1), // changes position of shadow
+                  ),
                 ],
                 image: DecorationImage(
                   image: AssetImage("assets/img/${index + 1}.jpeg"),
