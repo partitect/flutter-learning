@@ -16,7 +16,7 @@ class _PageControllerViewState extends State<PageControllerView> {
   var bottomBarList = [
     {"cIndex": 0, "title": "Home", "icon": "home"},
     {"cIndex": 1, "title": "Forms", "icon": "popcorn"},
-    {"cIndex": 2, "title": "Companies", "icon": "diamond"},
+    {"cIndex": 2, "title": "Football", "icon": "football"},
     {"cIndex": 3, "title": "Profile", "icon": "biography"},
     {"cIndex": 4, "title": "Settings", "icon": "gear"},
   ];
@@ -28,7 +28,7 @@ class _PageControllerViewState extends State<PageControllerView> {
     FavoriteViewExample(),
   ];
   var currentPage = 2;
-  Color _bgColor = Colors.transparent;
+  Color _bgColor = Colors.purple;
   double _iconSize = 30;
   double _position = -30;
   @override
@@ -42,16 +42,14 @@ class _PageControllerViewState extends State<PageControllerView> {
         body: pages[currentPage],
         bottomNavigationBar: Container(
           color: Colors.blue,
-          width: double.infinity,
           height: 100,
-          padding: EdgeInsets.only(
-            bottom: 15,
-          ),
+          padding: EdgeInsets.only(bottom: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 height: 70,
                 child: ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
@@ -83,7 +81,7 @@ class _PageControllerViewState extends State<PageControllerView> {
                           });
                         },
                         child: Container(
-                          width: MediaQuery.of(context).size.width / 5,
+                          width: MediaQuery.of(context).size.width / 5.3,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
@@ -98,7 +96,7 @@ class _PageControllerViewState extends State<PageControllerView> {
                                 style: GoogleFonts.notoSans(
                                   textStyle: TextStyle(
                                       color: Colors.white,
-                                      fontSize: 14,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w500),
                                 ),
                               ),
