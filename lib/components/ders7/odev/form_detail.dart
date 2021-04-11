@@ -104,24 +104,22 @@ class _FormDetailState extends State<FormDetail> {
               future: getData(),
               builder: (context, snapshot) {
                 //return Image.asset(snapshot.data[2].toString());
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 200,
-                  child: snapshot.data != null
-                      ? ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: EdgeInsets.all(5),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(4),
-                                child: Image.asset(snapshot.data[index]),
-                              ),
-                            );
-                          },
-                        )
-                      : SizedBox(
+                return snapshot.data != null
+                    ? ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.all(5),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(4),
+                              child: Image.asset(snapshot.data[index]),
+                            ),
+                          );
+                        },
+                      )
+                    : Center(
+                        child: SizedBox(
                           width: 20,
                           height: 20,
                           child: CircularProgressIndicator(
@@ -130,7 +128,7 @@ class _FormDetailState extends State<FormDetail> {
                             ),
                           ),
                         ),
-                );
+                      );
               },
             ),
           )
