@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/components/ders7/odev/form.dart';
+import 'package:flutter_application_1/components/ders8/villa_example.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: [
         const Locale('tr', 'TR'),
       ],
-      home: RegisterFormExample(),
+      home: ApiStartedExample(),
     );
   }
 }

@@ -40,6 +40,7 @@ dependencies:
   image_picker:
   multi_image_picker:
   flutter_absolute_path:
+  http:
 dev_dependencies:
   flutter_test:
     sdk: flutter
